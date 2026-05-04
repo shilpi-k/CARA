@@ -1626,7 +1626,9 @@ const DEFAULT_RULES = {
   scores: {
     cpt: 15, dx: 10, units: 15, dates: 20, auth: 40, provider: 25, member: 30
   },
-  thresholds: { lowMax: 15, medMax: 30 },
+  // FIX 4: thresholds aligned with original dataset scoring —
+  // Low=0 (score must be exactly 0), Medium=1–25, High>25
+  thresholds: { lowMax: 1, medMax: 26 },
   actions:    { Low: 'Auto Assign', Medium: 'Provider Clarification', High: 'Manual Review' },
   multiAuth: {
     enabled:   true,
@@ -1636,7 +1638,7 @@ const DEFAULT_RULES = {
       { dates: 'overlap', provider: 'off'    },  // Stage 3
     ],
     noMatch:  { score: 40, level: 'High',   action: 'Reject - No Auth Found' },
-    conflict: { score: 35, level: 'Medium', action: 'Manual Review' }
+    conflict: { score: 20, level: 'Medium', action: 'Manual Review' }
   }
 };
 
@@ -1846,18 +1848,25 @@ function recomputeClaims(rules) {
       c.Auth_not_Approved = 0;
     }
 
-    // Provider check
+    // Provider check — FIX: set Wrong_Provider flag so detail panel reflects correctly
     if (rules.provider.active && rules.provider.mode !== 'ignore') {
       const mismatch = c.Provider_ID !== c.Auth_provider;
+      c.Wrong_Provider = mismatch ? 1 : 0;
       if (mismatch) { riskScore += scores.provider; flags.push('Provider mismatch'); }
+    } else {
+      c.Wrong_Provider = 0;
     }
 
-    // Member check
+    // Member check — FIX: compare actual Member_ID on claim vs linked auth, not just Auth_ID presence
     if (rules.member.active && rules.member.mode !== 'ignore') {
-      // Member_ID on claim — in this dataset auth doesn't have separate member field
-      // We treat a synthetic check: member on claim vs auth ID prefix
-      const mismatch = !c.Auth_ID; // no auth at all means no member match
+      const linkedAuth = AUTH_DATA.find(a => a.Auth_ID === c.Auth_ID);
+      const mismatch = linkedAuth
+        ? String(linkedAuth.Member_ID) !== String(c.Member_ID)
+        : !!c.Auth_ID;
+      c.Member_Mismatch = mismatch ? 1 : 0;
       if (mismatch) { riskScore += scores.member; flags.push('Member mismatch'); }
+    } else {
+      c.Member_Mismatch = 0;
     }
 
     // Assign risk level
@@ -1871,21 +1880,28 @@ function recomputeClaims(rules) {
     c.Explanation = flags.join('; ');
     c._multiAuthIds = null; // reset
 
-    // Recommended Action
+    // Recommended Action — FIX 4b: map Reject to known labels that match filter buttons
     if (flags.length === 0) {
       c.Recommended_Action = 'Auto Assign';
+    } else if (c.Auth_Not_Available) {
+      c.Recommended_Action = 'Reject - No Authorization';
     } else if (c.Auth_not_Approved) {
-      if (actions[riskLevel] === 'Reject') {
-        c.Recommended_Action = 'Reject - Authorization Not Approved';
-      } else {
-        c.Recommended_Action = actions[riskLevel] === 'Auto Assign'
-          ? 'Manual Review'
-          : actions[riskLevel];
-      }
+      const act = actions[riskLevel];
+      c.Recommended_Action = (act === 'Reject' || act === 'Auto Assign')
+        ? 'Reject - Authorization Not Approved'
+        : act;
     } else {
-      c.Recommended_Action = actions[riskLevel] === 'Reject'
-        ? 'Reject - ' + flags[0]
-        : actions[riskLevel];
+      const act = actions[riskLevel];
+      if (act === 'Reject') {
+        // Map to the closest known reject label based on flags
+        if (flags.includes('CPT mismatch') && flags.includes('Diagnosis mismatch')) {
+          c.Recommended_Action = 'Reject - Incorrect Billing';
+        } else {
+          c.Recommended_Action = 'Manual Review';
+        }
+      } else {
+        c.Recommended_Action = act;
+      }
     }
   });
 
@@ -1920,7 +1936,12 @@ function recomputeClaims(rules) {
       c._matchStage      = null;
       c._hierarchyResult = null;
 
-      let stageResult = null;
+      // FIX 3: Skip multi-auth matching for claims with no auth on file —
+      // these are true "no auth" scenarios, not matching failures
+      if (c.Auth_Not_Available === 1 || !c.Auth_ID) {
+        c._hierarchyResult = 'no_auth_skip';
+        return;
+      }
       let stageIdx    = -1;
 
       for (let i = 0; i < ma.stages.length; i++) {
@@ -2046,27 +2067,32 @@ function previewImpact() {
     // Hierarchical multi-auth check in preview
     if (rules.multiAuth && rules.multiAuth.enabled) {
       const ma = rules.multiAuth;
-      function datesMatchP(c, a, mode) {
-        const cS=new Date(c.Start_Date),cE=new Date(c.End_Date),aS=new Date(a.Start_Date),aE=new Date(a.End_Date);
-        if (mode==='exact')   return cS.getTime()===aS.getTime()&&cE.getTime()===aE.getTime();
-        if (mode==='within')  return cS>=aS&&cE<=aE;
-        if (mode==='overlap') return cS<=aE&&cE>=aS;
-        return true;
+      // FIX 5: skip no-auth claims (same guard as recomputeClaims)
+      if (!(c.Auth_Not_Available === 1 || !c.Auth_ID)) {
+        function datesMatchP(cl, a, mode) {
+          const cS=new Date(cl.Start_Date),cE=new Date(cl.End_Date),aS=new Date(a.Start_Date),aE=new Date(a.End_Date);
+          if (mode==='exact')   return cS.getTime()===aS.getTime()&&cE.getTime()===aE.getTime();
+          if (mode==='within')  return cS>=aS&&cE<=aE;
+          if (mode==='overlap') return cS<=aE&&cE>=aS;
+          return true;
+        }
+        let overrideAction = null;
+        let foundMatch = false;
+        for (let i = 0; i < ma.stages.length; i++) {
+          const s = ma.stages[i];
+          const matches = AUTH_DATA.filter(a =>
+            a.Member_ID===c.Member_ID &&
+            a.Diagnosis_Code===c.Diagnosis_Code &&
+            datesMatchP(c,a,s.dates) &&
+            (s.provider==='off' || a.Provider_ID===c.Provider_ID)
+          );
+          if (matches.length === 1) { foundMatch = true; break; }
+          if (matches.length > 1)  { overrideAction = ma.conflict.action; foundMatch = true; break; }
+        }
+        // FIX 5: if loop exhausted all stages with 0 matches, apply noMatch action
+        if (!foundMatch) overrideAction = ma.noMatch.action;
+        if (overrideAction) action = overrideAction;
       }
-      let overrideAction = null;
-      for (let i = 0; i < ma.stages.length; i++) {
-        const s = ma.stages[i];
-        const matches = AUTH_DATA.filter(a =>
-          a.Member_ID===c.Member_ID &&
-          a.Diagnosis_Code===c.Diagnosis_Code &&
-          datesMatchP(c,a,s.dates) &&
-          (s.provider==='off' || a.Provider_ID===c.Provider_ID)
-        );
-        if (matches.length === 1) { overrideAction = null; break; }
-        if (matches.length > 1)  { overrideAction = ma.conflict.action; break; }
-        if (i === ma.stages.length - 1) overrideAction = ma.noMatch.action;
-      }
-      if (overrideAction) action = overrideAction;
     }
 
     if (action === 'Auto Assign')                                auto++;
