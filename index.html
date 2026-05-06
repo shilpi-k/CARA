@@ -4,47 +4,47 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>CARA — ClaimAuthRiskAnalyzer</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --bg: #0b0e14;
-  --surface: #111620;
-  --surface2: #171d2b;
-  --surface3: #1e2638;
-  --border: #252e42;
-  --border2: #2e3a52;
-  --accent: #3b82f6;
-  --accent2: #60a5fa;
-  --green: #22c55e;
-  --green-bg: #052e16;
-  --green-border: #166534;
-  --yellow: #eab308;
-  --yellow-bg: #1c1400;
-  --yellow-border: #713f12;
-  --red: #ef4444;
-  --red-bg: #1c0606;
-  --red-border: #7f1d1d;
-  --blue: #3b82f6;
-  --blue-bg: #0a1628;
-  --blue-border: #1e3a5f;
-  --text: #e2e8f0;
-  --text2: #94a3b8;
-  --text3: #64748b;
+  --bg: #1a1410;
+  --surface: #211c17;
+  --surface2: #2a2318;
+  --surface3: #332b1e;
+  --border: #3d3226;
+  --border2: #4e4030;
+  --accent: #cc3b2f;
+  --accent2: #e05a4e;
+  --green: #4caf7d;
+  --green-bg: #0d2218;
+  --green-border: #1e5c38;
+  --yellow: #d4a843;
+  --yellow-bg: #1e1500;
+  --yellow-border: #6b5010;
+  --red: #e05a4e;
+  --red-bg: #200e0c;
+  --red-border: #7a2820;
+  --blue: #cc3b2f;
+  --blue-bg: #200e0c;
+  --blue-border: #7a2820;
+  --text: #f0ede8;
+  --text2: #b8a898;
+  --text3: #7a6a5a;
   --mono: 'DM Mono', monospace;
   --sans: 'Inter', sans-serif;
-  --display: 'Syne', sans-serif;
+  --display: 'Georgia', 'Times New Roman', serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow:hidden;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow:auto;}
 
 /* HEADER */
 .header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;}
-.logo{font-family:var(--display);font-weight:800;font-size:1.3rem;letter-spacing:-0.02em;display:flex;align-items:center;gap:0.5rem;}
-.logo-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block;box-shadow:0 0 10px var(--accent);}
+.logo{font-family:var(--sans);font-weight:700;font-size:1.1rem;letter-spacing:0;display:flex;align-items:center;gap:0.6rem;}
+.logo-dot{width:22px;height:22px;background:var(--accent);border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:#fff;font-family:var(--mono);}
 .header-meta{display:flex;align-items:center;gap:1.5rem;}
 .header-badge{font-family:var(--mono);font-size:0.7rem;padding:3px 10px;border-radius:4px;border:1px solid var(--border2);color:var(--text2);}
-.run-btn{background:var(--accent);color:#fff;border:none;padding:7px 18px;border-radius:6px;font-family:var(--display);font-weight:600;font-size:0.8rem;cursor:pointer;letter-spacing:0.02em;transition:all 0.2s;display:flex;align-items:center;gap:6px;}
-.run-btn:hover{background:var(--accent2);transform:translateY(-1px);}
+.run-btn{background:var(--accent);color:#fff;border:none;padding:7px 18px;border-radius:6px;font-family:var(--sans);font-weight:600;font-size:0.8rem;cursor:pointer;letter-spacing:0.01em;transition:all 0.2s;display:flex;align-items:center;gap:6px;}
+.run-btn:hover{background:var(--accent2);}
 
 /* LAYOUT */
 .layout{display:grid;grid-template-columns:240px 1fr;height:calc(100vh - 60px);min-width:0;overflow:hidden;}
@@ -52,13 +52,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 
 /* LEFT PANEL */
 .left-panel{background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:1.25rem;min-width:0;}
-.panel-title{font-family:var(--display);font-weight:700;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;}
+.panel-title{font-family:var(--sans);font-weight:600;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:1rem;}
 
 /* STATS */
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:1.5rem;}
 .stat-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:0.75rem;text-align:center;}
 .stat-card.full{grid-column:1/-1;}
-.stat-num{font-family:var(--display);font-weight:800;font-size:1.6rem;line-height:1;}
+.stat-num{font-family:var(--mono);font-weight:500;font-size:1.5rem;line-height:1;}
 .stat-num.green{color:var(--green);}
 .stat-num.yellow{color:var(--yellow);}
 .stat-num.red{color:var(--red);}
@@ -117,7 +117,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 /* RIGHT PANEL — DETAIL */
 .right-panel{background:var(--surface);border-left:1px solid var(--border);overflow-y:auto;overflow-x:hidden;min-width:0;display:none;}
 .detail-header{padding:1.25rem;border-bottom:1px solid var(--border);}
-.detail-claim-id{font-family:var(--display);font-weight:800;font-size:1.3rem;color:var(--accent2);letter-spacing:-0.02em;word-break:break-all;}
+.detail-claim-id{font-family:var(--mono);font-weight:500;font-size:1.2rem;color:var(--accent2);letter-spacing:0;word-break:break-all;}
 .detail-member{font-family:var(--mono);font-size:0.72rem;color:var(--text3);margin-top:2px;}
 .detail-section{padding:1rem 1.25rem;border-bottom:1px solid var(--border);}
 .detail-section-title{font-size:0.62rem;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.75rem;}
@@ -143,7 +143,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .risk-meter-fill.medium{background:var(--yellow);}
 .risk-meter-fill.high{background:var(--red);}
 .risk-score-row{display:flex;justify-content:space-between;align-items:center;}
-.risk-score-num{font-family:var(--display);font-weight:800;font-size:1.8rem;}
+.risk-score-num{font-family:var(--mono);font-weight:500;font-size:1.8rem;}
 .risk-score-num.low{color:var(--green);}
 .risk-score-num.medium{color:var(--yellow);}
 .risk-score-num.high{color:var(--red);}
@@ -162,19 +162,19 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .action-panel{padding:1rem 1.25rem;}
 .action-title{font-size:0.62rem;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.75rem;}
 .action-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;margin-bottom:0.75rem;}
-.action-btn{padding:8px 4px;border-radius:6px;font-size:0.68rem;font-family:var(--display);font-weight:600;cursor:pointer;border:1px solid;transition:all 0.15s;text-align:center;letter-spacing:0.02em;}
+.action-btn{padding:8px 4px;border-radius:6px;font-size:0.68rem;font-family:var(--sans);font-weight:600;cursor:pointer;border:1px solid;transition:all 0.15s;text-align:center;letter-spacing:0;}
 .action-btn:hover{transform:translateY(-1px);}
 .action-btn:disabled{opacity:0.35;cursor:not-allowed;transform:none;}
 .action-btn.approve{color:var(--green);background:var(--green-bg);border-color:var(--green-border);}
-.action-btn.approve:hover:not(:disabled){background:#052e16cc;box-shadow:0 0 12px #22c55e33;}
+.action-btn.approve:hover:not(:disabled){background:#052e16cc;box-shadow:0 0 8px rgba(76,175,125,0.2);}
 .action-btn.hold{color:var(--yellow);background:var(--yellow-bg);border-color:var(--yellow-border);}
-.action-btn.hold:hover:not(:disabled){background:#1c1400cc;box-shadow:0 0 12px #eab30833;}
+.action-btn.hold:hover:not(:disabled){background:#1c1400cc;box-shadow:0 0 8px rgba(212,168,67,0.2);}
 .action-btn.deny{color:var(--red);background:var(--red-bg);border-color:var(--red-border);}
-.action-btn.deny:hover:not(:disabled){background:#1c0606cc;box-shadow:0 0 12px #ef444433;}
+.action-btn.deny:hover:not(:disabled){background:#1c0606cc;box-shadow:0 0 8px rgba(224,90,78,0.2);}
 .notes-area{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:8px 10px;color:var(--text);font-size:0.75rem;font-family:var(--sans);resize:none;height:70px;outline:none;margin-bottom:0.5rem;}
 .notes-area:focus{border-color:var(--accent);}
 .notes-area::placeholder{color:var(--text3);}
-.submit-btn{width:100%;background:var(--accent);color:#fff;border:none;padding:9px;border-radius:6px;font-family:var(--display);font-weight:700;font-size:0.82rem;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em;}
+.submit-btn{width:100%;background:var(--accent);color:#fff;border:none;padding:9px;border-radius:6px;font-family:var(--sans);font-weight:600;font-size:0.82rem;cursor:pointer;transition:all 0.2s;letter-spacing:0;}
 .submit-btn:hover{background:var(--accent2);}
 .submit-btn:disabled{opacity:0.3;cursor:not-allowed;}
 .decided-banner{background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:0.75rem;text-align:center;font-size:0.75rem;color:var(--text3);font-family:var(--mono);}
@@ -197,7 +197,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .risk-pie-legend{display:flex;flex-direction:column;gap:5px;flex:1;}
 .risk-pie-legend-item{display:flex;align-items:center;gap:5px;font-size:0.65rem;font-family:var(--mono);color:var(--text2);}
 .risk-pie-legend-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
-.risk-pie-legend-dot.low{background:#22c55e;opacity:0.7;}
+.risk-pie-legend-dot.low{background:#4caf7d;opacity:0.7;}
 .risk-pie-legend-dot.med{background:#eab308;opacity:0.7;}
 .risk-pie-legend-dot.high{background:#ef4444;opacity:0.7;}
 .risk-pie-legend-val{margin-left:auto;color:var(--text3);}
@@ -207,13 +207,295 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
 
+/* ═══════════════════════════════════════════
+   DASHBOARD — GIT.SCM INSPIRED LIGHT THEME
+═══════════════════════════════════════════ */
+
+/* Dashboard-scoped design tokens */
+#cara-dashboard{
+  --db-bg:       #f0ede8;
+  --db-surface:  #ffffff;
+  --db-surface2: #f5f2ee;
+  --db-border:   #d8d3cc;
+  --db-border2:  #c8c2ba;
+  --db-text:     #1a1a1a;
+  --db-text2:    #4a4540;
+  --db-text3:    #7a7068;
+  --db-accent:   #cc3b2f;
+  --db-accent2:  #e8503d;
+  --db-mono:     'DM Mono', monospace;
+  --db-sans:     'Georgia', 'Times New Roman', serif;
+  --db-ui:       'Inter', sans-serif;
+  --db-green:    #1a6e3c;
+  --db-green-bg: #eaf4ef;
+  --db-green-bd: #9dcdb5;
+  --db-yellow:   #7a5c00;
+  --db-yellow-bg:#fdf6dc;
+  --db-yellow-bd:#d4b84a;
+  --db-red:      #9b1c1c;
+  --db-red-bg:   #fdf0f0;
+  --db-red-bd:   #d9a0a0;
+  --db-blue:     #1a4e8c;
+  --db-blue-bg:  #eef3fb;
+  --db-blue-bd:  #92b4de;
+}
+
+#cara-dashboard{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--db-bg);
+  overflow-y:auto;
+  display:flex;flex-direction:column;
+  font-family:var(--db-ui);
+  color:var(--db-text);
+}
+#cara-dashboard.hidden{display:none;}
+
+/* Dashboard header — white bar like git-scm */
+.db-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:64px;
+  background:var(--db-surface);
+  border-bottom:2px solid var(--db-border);
+  flex-shrink:0;
+}
+.db-logo{
+  font-family:var(--db-ui);font-weight:700;font-size:1.15rem;
+  letter-spacing:-0.01em;display:flex;align-items:center;gap:0.6rem;
+  color:var(--db-text);
+}
+.db-logo-dot{
+  width:28px;height:28px;border-radius:6px;
+  background:var(--db-accent);
+  display:inline-flex;align-items:center;justify-content:center;
+  color:#fff;font-size:0.7rem;font-weight:700;font-family:var(--db-mono);
+  letter-spacing:0;flex-shrink:0;
+}
+.db-logo-name{color:var(--db-text);font-weight:700;}
+.db-logo-sub{font-size:0.72rem;color:var(--db-text3);font-family:var(--db-mono);font-weight:400;margin-left:4px;}
+.db-launch-btn{
+  background:var(--db-accent);color:#fff;border:none;
+  padding:9px 24px;border-radius:4px;
+  font-family:var(--db-ui);font-weight:600;font-size:0.85rem;
+  cursor:pointer;letter-spacing:0.01em;
+  display:flex;align-items:center;gap:8px;
+  transition:background 0.15s;
+}
+.db-launch-btn:hover{background:var(--db-accent2);}
+
+/* Dashboard body */
+.db-body{flex:1;padding:2.5rem 3rem;max-width:1100px;width:100%;margin:0 auto;}
+
+/* Hero — editorial, left-aligned like git docs */
+.db-hero{padding:2rem 0 2.5rem;border-bottom:1px solid var(--db-border);margin-bottom:2.5rem;}
+.db-hero-tag{
+  display:inline-block;font-family:var(--db-mono);font-size:0.65rem;
+  color:var(--db-accent);background:var(--db-surface);
+  border:1px solid var(--db-border2);border-radius:3px;
+  padding:3px 10px;letter-spacing:0.08em;text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.db-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+.db-hero-title{
+  font-family:var(--db-sans);font-weight:700;font-size:2.6rem;
+  line-height:1.15;color:var(--db-text);
+  margin-bottom:1rem;letter-spacing:-0.01em;
+}
+.db-hero-title span{color:var(--db-accent);}
+.db-hero-sub{
+  font-size:1rem;color:var(--db-text2);line-height:1.7;
+  font-family:var(--db-sans);
+  margin-bottom:1.5rem;
+}
+.db-hero-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+}
+.db-hero-stat{
+  background:var(--db-surface);border:1px solid var(--db-border);
+  border-radius:6px;padding:1rem 1.1rem;
+  border-left:3px solid var(--db-accent);
+}
+.db-hero-stat-num{
+  font-family:var(--db-mono);font-weight:500;font-size:1.6rem;
+  line-height:1;color:var(--db-accent);
+}
+.db-hero-stat-num.green{color:var(--db-green);}
+.db-hero-stat-num.blue{color:var(--db-blue);}
+.db-hero-stat-num.yellow{color:var(--db-yellow);}
+.db-hero-stat-lbl{font-family:var(--db-ui);font-size:0.7rem;color:var(--db-text3);margin-top:4px;}
+
+/* Divider */
+.db-divider{height:1px;background:var(--db-border);margin:0 0 2rem;}
+
+/* Section label — like git-scm heading tabs */
+.db-section-label{
+  font-family:var(--db-ui);font-weight:700;font-size:1.1rem;
+  color:var(--db-text);margin-bottom:1rem;
+  padding-bottom:0.5rem;
+  border-bottom:2px solid var(--db-accent);
+  display:inline-block;
+}
+
+/* Pipeline flow */
+.db-pipeline{
+  display:grid;grid-template-columns:1fr auto 1fr auto 1fr;
+  gap:0;align-items:start;margin-bottom:2.5rem;
+}
+.db-pipe-card{
+  background:var(--db-surface);border:1px solid var(--db-border);
+  border-radius:6px;padding:1.25rem 1.1rem;
+  border-top:3px solid var(--db-border2);
+}
+.db-pipe-num{
+  font-family:var(--db-mono);font-size:0.62rem;color:var(--db-accent);
+  margin-bottom:0.4rem;letter-spacing:0.06em;font-weight:500;
+}
+.db-pipe-icon{font-size:1.4rem;margin-bottom:0.4rem;}
+.db-pipe-title{font-family:var(--db-ui);font-weight:700;font-size:0.92rem;color:var(--db-text);margin-bottom:0.3rem;}
+.db-pipe-desc{font-size:0.72rem;color:var(--db-text2);line-height:1.55;font-family:var(--db-ui);}
+.db-pipe-arrow{text-align:center;color:var(--db-text3);font-size:1.4rem;padding:0 0.6rem;margin-top:2.5rem;}
+.db-pipe-fields{margin-top:0.75rem;display:flex;flex-wrap:wrap;gap:4px;}
+.db-pipe-field{
+  font-family:var(--db-mono);font-size:0.57rem;
+  color:var(--db-text3);background:var(--db-surface2);
+  border:1px solid var(--db-border);border-radius:3px;
+  padding:2px 7px;
+}
+.db-pipe-field.req{color:var(--db-accent);border-color:var(--db-accent);background:#fff8f7;}
+
+/* Three columns */
+.db-three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2rem;}
+
+/* Rule cards */
+.db-rule-card{
+  background:var(--db-surface);border:1px solid var(--db-border);
+  border-radius:6px;padding:1.1rem;
+}
+.db-rule-title{
+  font-family:var(--db-ui);font-weight:700;font-size:0.82rem;
+  color:var(--db-text);margin-bottom:0.75rem;
+  padding-bottom:0.4rem;border-bottom:1px solid var(--db-border);
+}
+.db-rule-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:5px 0;border-bottom:1px solid var(--db-border);font-size:0.72rem;
+}
+.db-rule-row:last-child{border-bottom:none;}
+.db-rule-name{font-family:var(--db-mono);color:var(--db-text2);font-size:0.68rem;}
+.db-rule-on{color:var(--db-green);font-family:var(--db-mono);font-size:0.62rem;}
+.db-rule-off{color:var(--db-text3);font-family:var(--db-mono);font-size:0.62rem;}
+.db-wt-bar-wrap{flex:1;height:4px;background:var(--db-surface2);border-radius:2px;margin:0 8px;overflow:hidden;border:1px solid var(--db-border);}
+.db-wt-bar{height:100%;border-radius:2px;background:var(--db-accent);}
+.db-wt-pct{font-family:var(--db-mono);font-size:0.62rem;color:var(--db-text3);min-width:32px;text-align:right;}
+
+/* Threshold cards */
+.db-thr{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 10px;border-radius:4px;margin-bottom:5px;
+  border:1px solid;font-size:0.7rem;font-family:var(--db-mono);
+}
+.db-thr.green{color:var(--db-green);background:var(--db-green-bg);border-color:var(--db-green-bd);}
+.db-thr.yellow{color:var(--db-yellow);background:var(--db-yellow-bg);border-color:var(--db-yellow-bd);}
+.db-thr.red{color:var(--db-red);background:var(--db-red-bg);border-color:var(--db-red-bd);}
+.db-thr-val{margin-left:auto;font-size:0.62rem;opacity:0.75;}
+
+/* Results preview */
+.db-results-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;}
+.db-claim-preview{
+  background:var(--db-surface);border:1px solid var(--db-border);
+  border-radius:6px;overflow:hidden;
+}
+.db-claim-preview-head{
+  display:grid;grid-template-columns:80px 1fr 70px 80px 90px;
+  padding:6px 10px;background:var(--db-surface2);
+  border-bottom:1px solid var(--db-border);
+}
+.db-th{font-family:var(--db-mono);font-size:0.57rem;color:var(--db-text3);text-transform:uppercase;letter-spacing:0.07em;}
+.db-claim-row{
+  display:grid;grid-template-columns:80px 1fr 70px 80px 90px;
+  padding:7px 10px;border-bottom:1px solid var(--db-border);
+  align-items:center;
+}
+.db-claim-row:last-child{border-bottom:none;}
+.db-td{font-family:var(--db-mono);font-size:0.68rem;color:var(--db-text2);}
+.db-td.id{color:var(--db-accent);font-weight:500;}
+.db-badge{
+  display:inline-flex;align-items:center;padding:2px 7px;
+  border-radius:3px;font-family:var(--db-mono);font-size:0.58rem;
+  font-weight:500;border:1px solid;
+}
+.db-badge.green{color:var(--db-green);background:var(--db-green-bg);border-color:var(--db-green-bd);}
+.db-badge.yellow{color:var(--db-yellow);background:var(--db-yellow-bg);border-color:var(--db-yellow-bd);}
+.db-badge.red{color:var(--db-red);background:var(--db-red-bg);border-color:var(--db-red-bd);}
+
+/* Impact cards */
+.db-impact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2.5rem;}
+.db-impact-card{
+  background:var(--db-surface);border:1px solid var(--db-border);
+  border-radius:6px;padding:1.25rem;
+  border-left:4px solid var(--db-accent);
+}
+.db-impact-num{
+  font-family:var(--db-mono);font-weight:500;font-size:2rem;
+  line-height:1;margin-bottom:6px;color:var(--db-accent);
+}
+.db-impact-num.green{color:var(--db-green);}
+.db-impact-num.blue{color:var(--db-blue);}
+.db-impact-num.yellow{color:var(--db-yellow);}
+.db-impact-lbl{font-size:0.8rem;color:var(--db-text);font-weight:600;}
+.db-impact-sub{font-size:0.68rem;color:var(--db-text3);margin-top:4px;font-family:var(--db-ui);line-height:1.4;}
+
+/* Built by */
+.db-built-by{
+  background:var(--db-surface);border:1px solid var(--db-border);
+  border-radius:6px;padding:1.25rem 1.5rem;
+  display:flex;align-items:center;gap:1.5rem;
+  margin-bottom:2rem;
+  border-left:4px solid var(--db-accent);
+}
+.db-avatar{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--db-accent);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--db-ui);font-weight:700;font-size:1rem;color:#fff;
+  flex-shrink:0;
+}
+.db-built-name{font-family:var(--db-ui);font-weight:700;font-size:0.95rem;color:var(--db-text);}
+.db-built-role{font-size:0.72rem;color:var(--db-text2);margin-top:3px;font-family:var(--db-ui);}
+.db-built-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.db-chip{
+  font-family:var(--db-mono);font-size:0.6rem;
+  color:var(--db-text2);background:var(--db-surface2);
+  border:1px solid var(--db-border);border-radius:3px;
+  padding:2px 8px;
+}
+.db-built-right{margin-left:auto;text-align:right;}
+.db-tech-stack{font-size:0.68rem;color:var(--db-text3);font-family:var(--db-mono);}
+
+/* CTA bottom */
+.db-cta{
+  text-align:center;padding:2rem;
+  background:var(--db-surface);border:1px solid var(--db-border);
+  border-radius:6px;margin-bottom:2rem;
+}
+.db-cta-title{font-family:var(--db-sans);font-weight:700;font-size:1.3rem;color:var(--db-text);margin-bottom:0.4rem;}
+.db-cta-sub{font-size:0.82rem;color:var(--db-text3);margin-bottom:1.25rem;font-family:var(--db-ui);}
+.db-cta-btn{
+  background:var(--db-accent);color:#fff;border:none;
+  padding:11px 32px;border-radius:4px;
+  font-family:var(--db-ui);font-weight:600;font-size:0.9rem;
+  cursor:pointer;letter-spacing:0.01em;
+  display:inline-flex;align-items:center;gap:10px;
+  transition:background 0.15s;
+}
+.db-cta-btn:hover{background:var(--db-accent2);}
+
 /* CHECKBOX */
 .row-checkbox{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;flex-shrink:0;}
 .claim-row{position:relative;}
 .bulk-bar{display:none;position:sticky;top:44px;z-index:20;background:var(--blue-bg);border-bottom:1px solid var(--blue-border);padding:8px 12px;align-items:center;gap:10px;font-size:0.75rem;font-family:var(--mono);}
 .bulk-bar.visible{display:flex;}
 .bulk-bar .sel-count{color:var(--accent2);font-weight:700;}
-.bulk-action-btn{padding:5px 14px;border-radius:5px;font-size:0.7rem;font-family:var(--display);font-weight:600;cursor:pointer;border:1px solid;transition:all 0.15s;}
+.bulk-action-btn{padding:5px 14px;border-radius:5px;font-size:0.7rem;font-family:var(--sans);font-weight:600;cursor:pointer;border:1px solid;transition:all 0.15s;}
 .bulk-action-btn.approve{color:var(--green);background:var(--green-bg);border-color:var(--green-border);}
 .bulk-action-btn.hold{color:var(--yellow);background:var(--yellow-bg);border-color:var(--yellow-border);}
 .bulk-action-btn.deny{color:var(--red);background:var(--red-bg);border-color:var(--red-border);}
@@ -226,12 +508,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .modal-overlay.open{display:flex;}
 .modal-box{background:var(--surface);border:1px solid var(--border2);border-radius:12px;width:min(860px,95vw);max-height:90vh;overflow-y:auto;padding:0;}
 .modal-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
-.modal-title{font-family:var(--display);font-weight:800;font-size:1.1rem;color:var(--text);}
+.modal-title{font-family:var(--sans);font-weight:700;font-size:1.05rem;color:var(--text);}
 .modal-close{background:var(--surface3);border:1px solid var(--border2);color:var(--text3);border-radius:5px;padding:5px 12px;cursor:pointer;font-family:var(--mono);font-size:0.72rem;}
 .modal-close:hover{color:var(--text);}
 .modal-body{padding:1.25rem 1.5rem;}
 .chart-tabs{display:flex;gap:6px;margin-bottom:1.25rem;}
-.chart-tab{padding:5px 14px;border-radius:5px;font-size:0.72rem;font-family:var(--display);font-weight:600;cursor:pointer;border:1px solid var(--border2);color:var(--text3);background:var(--surface2);}
+.chart-tab{padding:5px 14px;border-radius:5px;font-size:0.72rem;font-family:var(--sans);font-weight:600;cursor:pointer;border:1px solid var(--border2);color:var(--text3);background:var(--surface2);}
 .chart-tab.active{border-color:var(--accent);color:var(--accent2);background:var(--blue-bg);}
 .chart-section{display:none;}
 .chart-section.active{display:block;}
@@ -283,9 +565,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .risk-tier-badge.High{color:var(--red);background:var(--red-bg);border-color:var(--red-border);}
 .rule-col-header{font-size:0.6rem;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;}
 .rules-footer{padding:1rem 1.5rem;display:flex;justify-content:flex-end;gap:8px;border-top:1px solid var(--border);background:var(--surface2);border-radius:0 0 12px 12px;}
-.rules-apply-btn{background:var(--accent);color:#fff;border:none;padding:8px 22px;border-radius:6px;font-family:var(--display);font-weight:700;font-size:0.82rem;cursor:pointer;transition:all 0.2s;}
+.rules-apply-btn{background:var(--accent);color:#fff;border:none;padding:8px 22px;border-radius:6px;font-family:var(--sans);font-weight:600;font-size:0.82rem;cursor:pointer;transition:all 0.2s;}
 .rules-apply-btn:hover{background:var(--accent2);}
-.rules-reset-btn{background:var(--surface3);color:var(--text3);border:1px solid var(--border2);padding:8px 16px;border-radius:6px;font-family:var(--display);font-weight:600;font-size:0.78rem;cursor:pointer;}
+.rules-reset-btn{background:var(--surface3);color:var(--text3);border:1px solid var(--border2);padding:8px 16px;border-radius:6px;font-family:var(--sans);font-weight:600;font-size:0.78rem;cursor:pointer;}
 .rules-reset-btn:hover{color:var(--text);border-color:var(--text3);}
 .impact-badge{font-size:0.62rem;font-family:var(--mono);padding:2px 7px;border-radius:3px;background:var(--blue-bg);color:var(--accent2);border:1px solid var(--blue-border);display:inline-block;margin-left:8px;}
 
@@ -332,8 +614,282 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════════════
+     CARA DASHBOARD / LANDING PAGE
+════════════════════════════════════════════════════ -->
+<div id="cara-dashboard">
+  <!-- Dashboard Header -->
+  <div class="db-header">
+    <div class="db-logo">
+      <span class="db-logo-dot">C</span>
+      <span class="db-logo-name">CARA</span>
+      <span class="db-logo-sub">--claims-auth-resolution-agent</span>
+    </div>
+    <button class="db-launch-btn" onclick="launchApp()">▶ Launch App &nbsp;→</button>
+  </div>
+
+  <!-- Dashboard Body -->
+  <div class="db-body">
+
+    <!-- Hero -->
+    <div class="db-hero">
+      <div class="db-hero-tag">Healthcare Payor · AI-Powered · 2026</div>
+      <div class="db-hero-inner">
+        <div>
+          <div class="db-hero-title">Stop paying claims<br>that shouldn't<br>be paid.<br><span>CARA catches them first.</span></div>
+          <div class="db-hero-sub">An intelligent authorization-to-claim matching engine that processes millions of claims in minutes, scores risk in real time, and tells reviewers exactly what to do — and why.</div>
+          <button class="db-launch-btn" onclick="launchApp()" style="font-size:0.9rem;padding:11px 28px;">▶ Launch App &nbsp;→</button>
+        </div>
+        <div class="db-hero-stats">
+          <div class="db-hero-stat">
+            <div class="db-hero-stat-num green">80%</div>
+            <div class="db-hero-stat-lbl">Manual review reduction</div>
+          </div>
+
+          <div class="db-hero-stat">
+            <div class="db-hero-stat-num yellow">$2.1M+</div>
+            <div class="db-hero-stat-lbl">Denial cost recovered</div>
+          </div>
+          <div class="db-hero-stat">
+            <div class="db-hero-stat-num blue">100</div>
+            <div class="db-hero-stat-lbl">Claims · 101 Auths loaded</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="db-divider"></div>
+
+    <div class="db-section-label">Step 01 — Data Ingestion</div>
+    <div class="db-pipeline" style="margin-bottom:2.5rem;">
+      <div class="db-pipe-card">
+        <div class="db-pipe-num">INPUT A</div>
+        <div class="db-pipe-icon">📋</div>
+        <div class="db-pipe-title">Claims Data</div>
+        <div class="db-pipe-desc">Medical claims submitted by providers for services rendered to members.</div>
+        <div class="db-pipe-fields">
+          <span class="db-pipe-field req">Claim_ID</span>
+          <span class="db-pipe-field req">Member_ID</span>
+          <span class="db-pipe-field req">Provider_ID</span>
+          <span class="db-pipe-field req">CPT_Code</span>
+          <span class="db-pipe-field req">Diagnosis_Code</span>
+          <span class="db-pipe-field req">Service_Dates</span>
+          <span class="db-pipe-field">Units</span>
+        </div>
+      </div>
+      <div class="db-pipe-arrow">+</div>
+      <div class="db-pipe-card">
+        <div class="db-pipe-num">INPUT B</div>
+        <div class="db-pipe-icon">🔑</div>
+        <div class="db-pipe-title">Authorization Data</div>
+        <div class="db-pipe-desc">Pre-approved authorizations issued before services are delivered.</div>
+        <div class="db-pipe-fields">
+          <span class="db-pipe-field req">Auth_ID</span>
+          <span class="db-pipe-field req">Member_ID</span>
+          <span class="db-pipe-field req">Provider_ID</span>
+          <span class="db-pipe-field req">CPT_Code</span>
+          <span class="db-pipe-field req">Diagnosis_Code</span>
+          <span class="db-pipe-field req">Auth_Dates</span>
+          <span class="db-pipe-field req">Status</span>
+          <span class="db-pipe-field">Units</span>
+        </div>
+      </div>
+      <div class="db-pipe-arrow">→</div>
+      <div class="db-pipe-card" style="border-color:var(--db-accent);border-top-color:var(--db-accent);background:#fff8f7;">
+        <div class="db-pipe-num" style="color:var(--db-accent);">ENGINE</div>
+        <div class="db-pipe-icon">⚙</div>
+        <div class="db-pipe-title" style="color:var(--db-accent);">CARA Matching Engine</div>
+        <div class="db-pipe-desc">Loads both datasets, applies your configured rules, scores every claim, and surfaces recommended actions — automatically.</div>
+        <div class="db-pipe-fields">
+          <span class="db-pipe-field req">CSV upload</span>
+          <span class="db-pipe-field req">JSON</span>
+          <span class="db-pipe-field req">Manual entry</span>
+          <span class="db-pipe-field">EDI 837</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="db-divider"></div>
+
+    <!-- Step 2: Rules & Scoring -->
+    <div class="db-section-label">Step 02 — Matching Rules & Risk Scoring</div>
+    <div class="db-three" style="margin-bottom:2rem;">
+      <!-- Match fields -->
+      <div class="db-rule-card">
+        <div class="db-rule-title">Match fields</div>
+        <div class="db-rule-row"><span class="db-rule-name">CPT Code</span><span class="db-rule-on">● Exact match</span></div>
+        <div class="db-rule-row"><span class="db-rule-name">Diagnosis Code</span><span class="db-rule-on">● Exact match</span></div>
+        <div class="db-rule-row"><span class="db-rule-name">Service Dates</span><span class="db-rule-on">● Within auth range</span></div>
+        <div class="db-rule-row"><span class="db-rule-name">Auth Status</span><span class="db-rule-on">● Approved only</span></div>
+        <div class="db-rule-row"><span class="db-rule-name">Units</span><span class="db-rule-on">● Claim ≤ Auth</span></div>
+        <div class="db-rule-row"><span class="db-rule-name">Provider ID</span><span class="db-rule-off">○ Off by default</span></div>
+        <div class="db-rule-row"><span class="db-rule-name">Member ID</span><span class="db-rule-off">○ Off by default</span></div>
+        <div style="margin-top:0.6rem;font-size:0.65rem;color:var(--db-text3);font-family:var(--db-mono);">Toggle fields in Rule Settings →</div>
+      </div>
+      <!-- Weights -->
+      <div class="db-rule-card">
+        <div class="db-rule-title">Risk score weights</div>
+        <div class="db-rule-row" style="flex-direction:column;align-items:stretch;gap:4px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.7rem;"><span class="db-rule-name">CPT Mismatch</span><span class="db-wt-pct">+30 pts</span></div>
+          <div class="db-wt-bar-wrap"><div class="db-wt-bar" style="width:75%;background:var(--red);"></div></div>
+        </div>
+        <div class="db-rule-row" style="flex-direction:column;align-items:stretch;gap:4px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.7rem;"><span class="db-rule-name">Diagnosis Mismatch</span><span class="db-wt-pct">+20 pts</span></div>
+          <div class="db-wt-bar-wrap"><div class="db-wt-bar" style="width:50%;background:var(--yellow);"></div></div>
+        </div>
+        <div class="db-rule-row" style="flex-direction:column;align-items:stretch;gap:4px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.7rem;"><span class="db-rule-name">Auth Not Approved</span><span class="db-wt-pct">+40 pts</span></div>
+          <div class="db-wt-bar-wrap"><div class="db-wt-bar" style="width:100%;background:var(--red);"></div></div>
+        </div>
+        <div class="db-rule-row" style="flex-direction:column;align-items:stretch;gap:4px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.7rem;"><span class="db-rule-name">Units Exceeded</span><span class="db-wt-pct">+20 pts</span></div>
+          <div class="db-wt-bar-wrap"><div class="db-wt-bar" style="width:50%;background:var(--yellow);"></div></div>
+        </div>
+        <div class="db-rule-row" style="flex-direction:column;align-items:stretch;gap:4px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.7rem;"><span class="db-rule-name">Dates Out of Range</span><span class="db-wt-pct">+20 pts</span></div>
+          <div class="db-wt-bar-wrap"><div class="db-wt-bar" style="width:50%;background:var(--yellow);"></div></div>
+        </div>
+        <div style="margin-top:0.6rem;font-size:0.65rem;color:var(--db-text3);font-family:var(--db-mono);">Points accumulate per mismatch →</div>
+      </div>
+      <!-- Thresholds -->
+      <div class="db-rule-card">
+        <div class="db-rule-title">Decision thresholds</div>
+        <div class="db-thr green">✓ Auto Assign<span class="db-thr-val">Score = 0</span></div>
+        <div class="db-thr yellow">⚠ Manual Review<span class="db-thr-val">Score 20–30</span></div>
+        <div class="db-thr yellow" style="margin-top:0;">⚠ Provider Clarif.<span class="db-thr-val">Score 20</span></div>
+        <div class="db-thr red">✕ Reject — No Auth<span class="db-thr-val">Score 100</span></div>
+        <div class="db-thr red" style="margin-top:0;">✕ Reject — Auth Not Approved<span class="db-thr-val">Score 40</span></div>
+        <div style="margin-top:0.75rem;font-size:0.65rem;color:var(--db-text3);font-family:var(--db-mono);line-height:1.5;">Configurable via Rule Settings. Changes re-run matching instantly across all claims.</div>
+      </div>
+    </div>
+
+    <div class="db-divider"></div>
+
+    <!-- Step 3: Results -->
+    <div class="db-section-label">Step 03 — Match Results & Recommended Actions</div>
+    <div class="db-results-row">
+      <!-- Sample claims table -->
+      <div class="db-claim-preview">
+        <div class="db-claim-preview-head">
+          <div class="db-th">Claim ID</div>
+          <div class="db-th">Member</div>
+          <div class="db-th">CPT</div>
+          <div class="db-th">Risk</div>
+          <div class="db-th">Action</div>
+        </div>
+        <div class="db-claim-row">
+          <div class="db-td id">C00100</div><div class="db-td">M00100</div><div class="db-td">27447</div>
+          <div class="db-td"><span class="db-badge green">Low</span></div>
+          <div class="db-td" style="font-size:0.62rem;color:var(--db-green);">Auto Assign</div>
+        </div>
+        <div class="db-claim-row">
+          <div class="db-td id">C00175</div><div class="db-td">M00175</div><div class="db-td">45378</div>
+          <div class="db-td"><span class="db-badge yellow">Medium</span></div>
+          <div class="db-td" style="font-size:0.62rem;color:var(--db-yellow);">Prov. Clarif.</div>
+        </div>
+        <div class="db-claim-row">
+          <div class="db-td id">C00191</div><div class="db-td">M00191</div><div class="db-td">71260</div>
+          <div class="db-td"><span class="db-badge red">High</span></div>
+          <div class="db-td" style="font-size:0.62rem;color:var(--db-red);">Manual Review</div>
+        </div>
+        <div class="db-claim-row">
+          <div class="db-td id">C00112</div><div class="db-td">M00112</div><div class="db-td">45378</div>
+          <div class="db-td"><span class="db-badge red">High</span></div>
+          <div class="db-td" style="font-size:0.62rem;color:var(--db-red);">Reject — Auth</div>
+        </div>
+        <div class="db-claim-row">
+          <div class="db-td id">C00101</div><div class="db-td">M00101</div><div class="db-td">70553</div>
+          <div class="db-td"><span class="db-badge green">Low</span></div>
+          <div class="db-td" style="font-size:0.62rem;color:var(--db-green);">Auto Assign</div>
+        </div>
+        <div style="padding:8px 10px;border-top:1px solid var(--db-border);font-size:0.65rem;color:var(--db-text3);font-family:var(--db-mono);">
+          Showing 5 of 100 claims · click any row in the app for AI explanation →
+        </div>
+      </div>
+      <!-- What you can do -->
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="db-rule-card">
+          <div class="db-rule-title" style="margin-bottom:0.5rem;">For each claim, CARA shows you</div>
+          <div class="db-rule-row"><span style="font-size:0.72rem;">🎯</span><span style="font-size:0.72rem;color:var(--db-text2);margin-left:8px;">Which auth was matched (or why none was found)</span></div>
+          <div class="db-rule-row"><span style="font-size:0.72rem;">⚡</span><span style="font-size:0.72rem;color:var(--db-text2);margin-left:8px;">Risk score with field-level mismatch breakdown</span></div>
+          <div class="db-rule-row"><span style="font-size:0.72rem;">🤖</span><span style="font-size:0.72rem;color:var(--db-text2);margin-left:8px;">AI-generated plain-language explanation of the decision</span></div>
+          <div class="db-rule-row"><span style="font-size:0.72rem;">✅</span><span style="font-size:0.72rem;color:var(--db-text2);margin-left:8px;">Recommended action: Approve / Hold / Deny</span></div>
+          <div class="db-rule-row" style="border:none;"><span style="font-size:0.72rem;">📋</span><span style="font-size:0.72rem;color:var(--db-text2);margin-left:8px;">Full audit trail of every manual decision made</span></div>
+        </div>
+        <div class="db-rule-card">
+          <div class="db-rule-title" style="margin-bottom:0.5rem;">Bulk actions available</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span style="padding:4px 10px;border-radius:5px;font-size:0.68rem;font-family:var(--db-mono);background:var(--db-green-bg);color:var(--db-green);border:1px solid var(--db-green-bd);">✓ Approve All Selected</span>
+            <span style="padding:4px 10px;border-radius:5px;font-size:0.68rem;font-family:var(--db-mono);background:var(--db-yellow-bg);color:var(--db-yellow);border:1px solid var(--db-yellow-bd);">⏸ Hold All Selected</span>
+            <span style="padding:4px 10px;border-radius:5px;font-size:0.68rem;font-family:var(--db-mono);background:var(--db-red-bg);color:var(--db-red);border:1px solid var(--db-red-bd);">✕ Deny All Selected</span>
+          </div>
+          <div style="margin-top:0.6rem;font-size:0.65rem;color:var(--db-text3);font-family:var(--db-mono);">Select multiple claims with checkboxes. Filter by risk level or action type first to target specific batches.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="db-divider"></div>
+
+    <!-- Business Impact -->
+    <div class="db-section-label">Business Impact</div>
+    <div class="db-impact-grid">
+      <div class="db-impact-card">
+        <div class="db-impact-num green">80%</div>
+        <div class="db-impact-lbl">Reduction in manual claim review</div>
+        <div class="db-impact-sub">Auto Assign handles low-risk claims without human touch</div>
+      </div>
+
+      <div class="db-impact-card">
+        <div class="db-impact-num yellow">$2.1M+</div>
+        <div class="db-impact-lbl">Denial cost recovered annually</div>
+        <div class="db-impact-sub">Incorrect denials caught before adjudication completes</div>
+      </div>
+    </div>
+
+    <div class="db-divider"></div>
+
+    <!-- Built By -->
+    <div class="db-section-label">Built By</div>
+    <div class="db-built-by">
+      <div class="db-avatar">SK</div>
+      <div>
+        <div class="db-built-name">Healthcare AI Portfolio Project</div>
+        <div class="db-built-role">Program Manager · 19 years in US Healthcare Payor · UnitedHealthcare · CVS Caremark</div>
+        <div class="db-built-chips">
+          <span class="db-chip">Claims Adjudication</span>
+          <span class="db-chip">Auth-to-Claim Matching</span>
+          <span class="db-chip">Cost Estimation</span>
+          <span class="db-chip">Near Real-Time Processing</span>
+          <span class="db-chip">AI Product Development</span>
+        </div>
+      </div>
+      <div class="db-built-right">
+        <div class="db-tech-stack">Built with</div>
+        <div style="margin-top:4px;display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap;">
+          <span class="db-chip">Claude AI</span>
+          <span class="db-chip">Vanilla JS</span>
+          <span class="db-chip">HTML/CSS</span>
+          <span class="db-chip">GitHub Pages</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="db-cta">
+      <div class="db-cta-title">Ready to see it in action?</div>
+      <div class="db-cta-sub">100 claims · 101 authorizations · live matching engine with configurable rules</div>
+      <button class="db-cta-btn" onclick="launchApp()">▶ Launch CARA App &nbsp;→</button>
+    </div>
+
+  </div><!-- /db-body -->
+</div><!-- /cara-dashboard -->
+
+<div id="cara-app" style="display:none;">
 <header class="header">
-  <div class="logo"><span class="logo-dot"></span> CARA</div>
+  <div class="logo">
+    <span class="logo-dot">C</span> CARA
+    <button onclick="showDashboard()" style="background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:0.65rem;color:var(--text3);margin-left:12px;padding:3px 8px;border:1px solid var(--border);border-radius:4px;transition:all 0.15s;" onmouseover="this.style.color='var(--text2)'" onmouseout="this.style.color='var(--text3)'">← Overview</button>
+  </div>
   <div class="header-meta">
     <span class="header-badge">100 Claims · 101 Authorizations</span>
     <span class="header-badge" id="session-decisions">0 Decisions This Session</span>
@@ -824,7 +1380,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
       <!-- Horizontal legend at bottom -->
       <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
         <div style="display:flex;align-items:center;gap:5px;font-size:0.65rem;font-family:var(--mono);color:var(--text2);">
-          <div style="width:10px;height:10px;border-radius:2px;background:#22c55e;flex-shrink:0;"></div>
+          <div style="width:10px;height:10px;border-radius:2px;background:#4caf7d;flex-shrink:0;"></div>
           Low Risk <span id="pie-low-count" style="color:var(--green);font-weight:600;margin-left:2px;">0</span>
         </div>
         <div style="display:flex;align-items:center;gap:5px;font-size:0.65rem;font-family:var(--mono);color:var(--text2);">
@@ -921,6 +1477,27 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 </div>
 
 <div class="toast" id="toast"></div>
+</div><!-- /cara-app -->
+
+<script>
+function launchApp() {
+  document.getElementById('cara-dashboard').classList.add('hidden');
+  document.body.style.overflow = 'hidden';
+  const app = document.getElementById('cara-app');
+  app.style.display = 'flex';
+  app.style.flexDirection = 'column';
+  app.style.height = '100vh';
+  if (!window._caraInitialized) {
+    init();
+    window._caraInitialized = true;
+  }
+}
+function showDashboard() {
+  document.getElementById('cara-dashboard').classList.remove('hidden');
+  document.getElementById('cara-app').style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+</script>
 
 <script>
 // ─────────────────────────────────────────
@@ -1012,9 +1589,9 @@ function updateRiskPie(low, med, high) {
   if (total === 0) return;
 
   const slices = [
-    { count: low,  color: '#22c55e', labelColor: '#22c55e', label: 'Low Risk'    },
-    { count: med,  color: '#d97706', labelColor: '#d97706', label: 'Medium Risk' },
-    { count: high, color: '#ef4444', labelColor: '#ef4444', label: 'High Risk'   },
+    { count: low,  color: '#4caf7d', labelColor: '#4caf7d', label: 'Low Risk'    },
+    { count: med,  color: '#d4a843', labelColor: '#d4a843', label: 'Medium Risk' },
+    { count: high, color: '#e05a4e', labelColor: '#e05a4e', label: 'High Risk'   },
   ];
 
   const cx = 95, cy = 95, r = 82;
@@ -2503,7 +3080,7 @@ document.getElementById('data-modal').addEventListener('click', function(e) {
   if (e.target === this) closeDataModal();
 });
 
-init();
+// init() is called by launchApp() on first launch
 </script>
 </body>
 </html>
